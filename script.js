@@ -23,6 +23,44 @@ function reverseMessage(message) {
     return reversed_word_arr.join(" ");
 };
 
+function shiftCharacters(message) {
+    let final_arr = [];
+
+    // turn message into an array of words
+    let message_arr = message.split(" ");
+
+    for (const word of message_arr) {
+        let new_word = "";
+
+        for (let i = 0; i < word.length; i++) {
+            let char = word[i];
+
+            if (char >= 'a' && char <= 'z') {
+                // shift lowercase letters 3 positions backward
+                let new_char = String.fromCharCode(
+                    ((char.charCodeAt(0) - 97 - 3 + 26) % 26) + 97
+                );
+                new_word += new_char;
+
+            } else if (char >= 'A' && char <= 'Z') {
+                // shift uppercase letters 3 positions backward
+                let new_char = String.fromCharCode(
+                    ((char.charCodeAt(0) - 65 - 3 + 26) % 26) + 65
+                );
+                new_word += new_char;
+
+            } else {
+                // preserve spaces, punctuation, and numbers
+                new_word += char;
+            }
+        }
+
+        final_arr.push(new_word);
+    }
+
+    return final_arr.join(" ");
+}
+
 // declare the things we need as variables
 // call the event listener with a function
 // in that function, call the translateNumbers function and return its output
@@ -35,16 +73,6 @@ decodeButton.addEventListener("click", () => {
     const currMessage = encodedInput.value;
     const newInput = translateNumbers(currMessage);
     const reversedInput = reverseMessage(newInput);
-    decodedOutput.textContent = reversedInput;
+    const finalInput = shiftCharacters(reversedInput);
+    decodedOutput.textContent = finalInput;
 });
-
-
-
-
-
-
-
-
-
-
-
