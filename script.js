@@ -12,6 +12,16 @@ function translateNumbers(message) {
     return result;
 };
 
+function reverseMessage(message) {
+    // split message into an array of words
+    let word_array = message.split(" ");
+
+    // reverse the order of elements in an array
+    let reversed_word_arr = word_array.toReversed();
+
+    // join elements back together in a single string
+    return reversed_word_arr.join(" ");
+};
 
 // declare the things we need as variables
 // call the event listener with a function
@@ -24,5 +34,17 @@ const decodedOutput = document.getElementById("decodedOutput");
 decodeButton.addEventListener("click", () => {
     const currMessage = encodedInput.value;
     const newInput = translateNumbers(currMessage);
-    decodedOutput.textContent = newInput;
+    const reversedInput = reverseMessage(newInput);
+    decodedOutput.textContent = reversedInput;
 });
+
+
+
+
+
+
+
+
+
+
+
